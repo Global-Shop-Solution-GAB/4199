@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SyntaxEdit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BorderStyle>None</BorderStyle>
+  <Pages>
+    <DefaultPage>
+      <Header>
+        <Offset>
+          <X>0</X>
+          <Y>0</Y>
+        </Offset>
+      </Header>
+      <Footer>
+        <Offset>
+          <X>0</X>
+          <Y>0</Y>
+        </Offset>
+      </Footer>
+      <PageSize>
+        <Width>0</Width>
+        <Height>0</Height>
+      </PageSize>
+    </DefaultPage>
+  </Pages>
+  <DisplayStrings />
+  <Selection>
+    <SelectionRect>
+      <Location>
+        <X>0</X>
+        <Y>362</Y>
+      </Location>
+      <Size>
+        <Width>24</Width>
+        <Height>4</Height>
+      </Size>
+      <X>0</X>
+      <Y>362</Y>
+      <Width>24</Width>
+      <Height>4</Height>
+    </SelectionRect>
+    <Options>UseColors OverwriteBlocks SelectLineOnTripleClick CopyLineWhenEmpty SelectWordOnCtrlClick</Options>
+  </Selection>
+  <Gutter>
+    <LineNumbersForeColor>WindowText</LineNumbersForeColor>
+    <Options>PaintLineNumbers PaintBookMarks PaintLineModificators</Options>
+  </Gutter>
+  <Margin>
+    <Visible>false</Visible>
+  </Margin>
+  <LineStyles />
+  <LineSeparator />
+  <Printing>
+    <Footer>
+      <Offset>
+        <X>0</X>
+        <Y>0</Y>
+      </Offset>
+    </Footer>
+    <Header>
+      <Offset>
+        <X>0</X>
+        <Y>0</Y>
+      </Offset>
+    </Header>
+  </Printing>
+  <WhiteSpace />
+  <TextSource>
+    <Position>
+      <X>0</X>
+      <Y>362</Y>
+    </Position>
+    <Lexer>
+      <Scheme>
+        <Author>Quantum Whale, LLC.</Author>
+        <Copyright>Copyright (c) 2004 - 2014 Quantum Whale LLC.</Copyright>
+        <FileType>gas</FileType>
+        <Version>1.5</Version>
+        <Styles>
+          <Style>
+            <Name>idents</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>numbers</Name>
+            <ForeColor>ControlText</ForeColor>
+          </Style>
+          <Style>
+            <Name>reswords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>comments</Name>
+            <ForeColor>Green</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>xmlcomments</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>symbols</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>whitespace</Name>
+            <ForeColor>WindowText</ForeColor>
+          </Style>
+          <Style>
+            <Name>strings</Name>
+            <ForeColor>Maroon</ForeColor>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>directives</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>htmlparams</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>syntax errors</Name>
+            <ForeColor>Red</ForeColor>
+          </Style>
+          <Style>
+            <Name>codes nippets</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>255:180:228:180</BackColor>
+          </Style>
+          <Style>
+            <Name>GabReservedWords</Name>
+            <ForeColor>Blue</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabTokenWithBrackets</Name>
+            <ForeColor>Gray</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabFunctionIntrinsicDebug</Name>
+            <ForeColor>White</ForeColor>
+            <BackColor>Red</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+          <Style>
+            <Name>GabVariable</Name>
+            <ForeColor>Teal</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabVariableSystemDefined</Name>
+            <ForeColor>Teal</ForeColor>
+            <FontStyle>Bold Italic</FontStyle>
+          </Style>
+          <Style>
+            <Name>GabGui</Name>
+            <ForeColor>OrangeRed</ForeColor>
+          </Style>
+          <Style>
+            <Name>GabProgramSubStartEnd</Name>
+            <ForeColor>Black</ForeColor>
+            <BackColor>LightGray</BackColor>
+            <FontStyle>Bold</FontStyle>
+            <PlainText>true</PlainText>
+          </Style>
+        </Styles>
+      </Scheme>
+    </Lexer>
+    <TextStrings>
+      <Lines>
+        <string>Program.Sub.ScreenSU.Start</string>
+        <string>Gui.F_Maint..Create</string>
+        <string>Gui.F_Maint..Size(6495,4695)</string>
+        <string>Gui.F_Maint..MinX(0)</string>
+        <string>Gui.F_Maint..MinY(0)</string>
+        <string>Gui.F_Maint..Position(0,0)</string>
+        <string>Gui.F_Maint..BackColor(-2147483633)</string>
+        <string>Gui.F_Maint..MousePointer(0)</string>
+        <string>Gui.F_Maint..Event(UnLoad,Form_UnLoad)</string>
+        <string>Gui.F_Maint..Caption("Commission Maintenance")</string>
+        <string>Gui.F_Maint.lbl1.Create(Label,"Salesperson",True,1125,255,0,240,255,True,0,"Arial",8,-986896,0)</string>
+        <string>Gui.F_Maint.ddlSalesperson.Create(DropDownList)</string>
+        <string>Gui.F_Maint.ddlSalesperson.Size(2370,330)</string>
+        <string>Gui.F_Maint.ddlSalesperson.Position(255,465)</string>
+        <string>Gui.F_Maint.ddlSalesperson.Event(Change,ddlSalesperson_Change)</string>
+        <string>Gui.F_Maint.ddlSalesperson.Event(Click,ddlSalesperson_Change)</string>
+        <string>Gui.F_Maint.txtPart.Create(TextBox,"",True,1965,300,0,2880,465,True,0,"Arial",8,-2147483643,1)</string>
+        <string>Gui.F_Maint.lbl2.Create(Label,"Part",True,570,255,0,2865,255,True,0,"Arial",8,-986896,0)</string>
+        <string>Gui.F_Maint.cmdPartBrowse.Create(Button)</string>
+        <string>Gui.F_Maint.cmdPartBrowse.Size(450,375)</string>
+        <string>Gui.F_Maint.cmdPartBrowse.Position(4950,420)</string>
+        <string>Gui.F_Maint.cmdPartBrowse.Caption("^")</string>
+        <string>Gui.F_Maint.cmdPartBrowse.Event(Click,cmdPartBrowse_Click)</string>
+        <string>Gui.F_Maint.cmdAdd.Create(Button)</string>
+        <string>Gui.F_Maint.cmdAdd.Size(675,375)</string>
+        <string>Gui.F_Maint.cmdAdd.Position(5520,435)</string>
+        <string>Gui.F_Maint.cmdAdd.Caption("Add")</string>
+        <string>Gui.F_Maint.cmdAdd.Event(Click,cmdAdd_Click)</string>
+        <string>Gui.F_Maint.GsGridControl1.Create(GsGridControl)</string>
+        <string>Gui.F_Maint.GsGridControl1.Size(5850,2595)</string>
+        <string>Gui.F_Maint.GsGridControl1.Position(255,915)</string>
+        <string>Gui.F_Maint.cmdSave.Create(Button)</string>
+        <string>Gui.F_Maint.cmdSave.Size(855,375)</string>
+        <string>Gui.F_Maint.cmdSave.Position(255,3615)</string>
+        <string>Gui.F_Maint.cmdSave.Caption("Save")</string>
+        <string>Gui.F_Maint.cmdSave.Event(Click,cmdSave_Click)</string>
+        <string>Gui.F_Maint.cmdDelete.Create(Button)</string>
+        <string>Gui.F_Maint.cmdDelete.Size(855,375)</string>
+        <string>Gui.F_Maint.cmdDelete.Position(1245,3615)</string>
+        <string>Gui.F_Maint.cmdDelete.Caption("Delete")</string>
+        <string>Gui.F_Maint.cmdDelete.Event(Click,cmdDelete_Click)</string>
+        <string>Program.Sub.ScreenSU.End</string>
+        <string />
+        <string>Program.Sub.Preflight.Start</string>
+        <string>Program.Sub.Preflight.End</string>
+        <string />
+        <string>Program.Sub.Main.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Main_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)</string>
+        <string>'Load Drop Down List</string>
+        <string>F.Intrinsic.Control.CallSub(Load_Salespersons)</string>
+        <string>'Create DataTable</string>
+        <string>F.Intrinsic.Control.CallSub(Create_DataTable)</string>
+        <string>'Format GridView</string>
+        <string>F.Intrinsic.Control.CallSub(Format_GridView)</string>
+        <string>Gui.F_Maint..Show</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Main_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Main.End</string>
+        <string />
+        <string>Program.Sub.cmdPartBrowse_Click.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("cmdPartBrowse_Click_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sRet.Declare(String)</string>
+        <string>V.Local.sFilter.Declare(String)</string>
+        <string />
+        <string>'Launch Part browser</string>
+        <string>F.Intrinsic.UI.Browser(105,"",V.Local.sRet)</string>
+        <string>'Make sure a selection was made before loading to textbox</string>
+        <string>F.Intrinsic.Control.If(V.Local.sRet,&lt;&gt;,"***CANCEL***")</string>
+        <string>	'Split the return</string>
+        <string>	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)</string>
+        <string>	'Call check part subroutine</string>
+        <string>	F.Intrinsic.Control.CallSub(check_part,"Part",V.Local.sRet(0))</string>
+        <string />
+        <string>	F.Intrinsic.Control.If(V.Args.Exists,=,False)</string>
+        <string>		Gui.F_Maint.txtPart.Text(V.Local.sRet(0))</string>
+        <string>	F.Intrinsic.Control.Else</string>
+        <string>		F.Intrinsic.UI.Msgbox("Part already exists for Salesperson")</string>
+        <string>		Gui.F_Maint.txtPart.Text("")</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("cmdPartBrowse_Click_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.cmdPartBrowse_Click.End</string>
+        <string />
+        <string>Program.Sub.ddlSalesperson_Change.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("ddlSalesperson_Change_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sSalesPerson.Declare(String)</string>
+        <string>V.Local.sFilter.Declare(String)</string>
+        <string />
+        <string>'Whenever a new Salesperson is selected, re-load datatable with that persons information</string>
+        <string>V.Local.sSalesPerson.Set(V.Screen.F_Maint!ddlSalesperson.Text)</string>
+        <string />
+        <string>F.Intrinsic.Control.If(V.Local.sSalesPerson,&lt;&gt;,"")</string>
+        <string>	'Build filter</string>
+        <string>	F.Intrinsic.String.Build("SALESPERSON='{0}'",V.Local.sSalesPerson,V.Local.sFilter)</string>
+        <string>	'Set filter so that the grid only shows information for that particular salesperson</string>
+        <string>	F.Data.DataView.SetFilter("Commission","Comm_View",V.Local.sFilter)</string>
+        <string>	'Check to make sure that the part doesn't already exist for the salesperson if it is selected already</string>
+        <string>	F.Intrinsic.Control.CallSub(check_part,"Part",V.Screen.F_Maint!txtPart.Text)</string>
+        <string>	</string>
+        <string>	F.Intrinsic.Control.If(V.Args.Exists,=,True)</string>
+        <string>		F.Intrinsic.UI.Msgbox("Part already exists for Salesperson")</string>
+        <string>		Gui.F_Maint.txtPart.Text("")</string>
+        <string>	F.Intrinsic.Control.EndIf</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'If user selects blank load all data</string>
+        <string>	F.Data.DataView.SetFilter("Commission","Comm_View","")</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("ddlSalesperson_Change_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.ddlSalesperson_Change.End</string>
+        <string />
+        <string>Program.Sub.cmdSave_Click.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("cmdSave_Click_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>'Save to database. mode 256 updates any modified records, and adds new records for those that are new</string>
+        <string>F.Data.DataTable.SaveToDB("Commission","con","GCG_4199_COMM_MAINT","SALESPERSON*!*PART",256)</string>
+        <string>'Save to database for deleted records. mode 256 does not account for anything that has been deleted</string>
+        <string>F.Data.DataTable.SaveToDB("Commission","con","GCG_4199_COMM_MAINT","SALESPERSON*!*PART",4)</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("cmdSave_Click_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.cmdSave_Click.End</string>
+        <string />
+        <string>Program.Sub.Load_Salespersons.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Load_Salespersons_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>'Add Empty value to Drop Down List</string>
+        <string>Gui.F_Maint.ddlSalesperson.AddItem("")</string>
+        <string />
+        <string>'Open recordset to get list of salespersons to add to Drop Down List</string>
+        <string>F.ODBC.Connection!con.OpenLocalRecordsetRO("rstSales","SELECT (ID + ' - ' + NAME) AS SALESPERSON FROM V_SALESPERSONS")</string>
+        <string />
+        <string>'Check to make sure we found records, otherwise inform user and exit program</string>
+        <string>F.Intrinsic.Control.If(V.ODBC.con!rstSales.EOF,&lt;&gt;,True)</string>
+        <string>	'Loop through the recordset and add them to the ddl</string>
+        <string>	F.Intrinsic.Control.DoUntil(V.ODBC.con!rstSales.EOF,=,True)</string>
+        <string>		Gui.F_Maint.ddlSalesperson.AddItem(V.ODBC.con!rstSales.FieldValTrim!SALESPERSON)</string>
+        <string>		F.ODBC.con!rstSales.MoveNext</string>
+        <string>	F.Intrinsic.Control.Loop</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.UI.Msgbox("No Salespersons found. Exiting Program.","Error")</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Load_Salespersons_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Load_Salespersons.End</string>
+        <string />
+        <string>Program.Sub.Create_DataTable.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Load_Salespersons_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>F.Data.DataTable.CreateFromSQL("Commission","con","SELECT SALESPERSON,PART,COMM_PERCENT FROM GCG_4199_COMM_MAINT",True)</string>
+        <string>F.Data.DataView.Create("Commission","Comm_View",22,"","SALESPERSON ASC")</string>
+        <string>Gui.F_Maint.GsGridControl1.AddGridViewFromDataView("Grid_Comm","Commission","Comm_View")</string>
+        <string>Gui.F_Maint.GsGridControl1.MainView("Grid_Comm")</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Load_Salespersons_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Create_DataTable.End</string>
+        <string />
+        <string>Program.Sub.Format_GridView.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Create_DataTable_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>'Make Commission percent Column editable</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","ReadOnly","False")</string>
+        <string />
+        <string>'Set Column Titles</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","Caption","% Comm")</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","SALESPERSON","Caption","Salesperson")</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","Caption","Part")</string>
+        <string />
+        <string>'Set Column Widths</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","WIDTH",50)</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","FixedWidth",True)</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","WIDTH",125)</string>
+        <string>Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","FixedWidth",True)</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Create_DataTable_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Format_GridView.End</string>
+        <string />
+        <string>Program.Sub.cmdAdd_Click.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("cmdAdd_Click_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sValues.Declare(String)</string>
+        <string />
+        <string>'Make sure the user has selected both a salesperson and a part</string>
+        <string>F.Intrinsic.Control.If(V.Screen.F_Maint!ddlSalesperson.Text,=,"")</string>
+        <string>	F.Intrinsic.UI.Msgbox("You must select a Salesperson.")</string>
+        <string>F.Intrinsic.Control.ElseIf(V.Screen.F_Maint!txtPart.Text,=,"")</string>
+        <string>	F.Intrinsic.UI.Msgbox("You must select a Part.")</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	'Build list of values to be added to the grid</string>
+        <string>  	F.Intrinsic.String.Build("{0}*!*{1}*!*.0",V.Screen.F_Maint!ddlSalesperson.Text,V.Screen.F_Maint!txtPart.Text,V.Local.sValues)</string>
+        <string>	Gui.F_Maint.GsGridControl1.AddRow("Grid_Comm",V.Local.sValues)</string>
+        <string>	'Reset the part textbox</string>
+        <string>	Gui.F_Maint.txtPart.Text("")</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string>	</string>
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("cmdAdd_Click_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.cmdAdd_Click.End</string>
+        <string />
+        <string>Program.Sub.cmdDelete_Click.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("cmdDelete_Click_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sRow.Declare(String)</string>
+        <string>V.Local.iRow.Declare(Long)</string>
+        <string>V.Local.iC.Declare(Long)</string>
+        <string />
+        <string>Gui.F_Maint.GsGridControl1.GetSelectedRowsInFocus(V.Local.sRow)</string>
+        <string />
+        <string />
+        <string>F.Intrinsic.Control.If(V.Local.sRow,&lt;&gt;,"")</string>
+        <string>	F.Intrinsic.String.Split(V.Local.sRow,"*!*",V.Local.sRow)</string>
+        <string>	</string>
+        <string>	F.Intrinsic.Control.For(V.Local.iC,0,V.Local.sRow.UBound,1)</string>
+        <string>		V.Local.iRow.Set(V.Local.sRow(V.Local.iC))</string>
+        <string>		F.Data.DataTable.DeleteRow("Commission",V.Local.iRow)</string>
+        <string>	F.Intrinsic.Control.Next(V.Local.iC)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("cmdDelete_Click_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.cmdDelete_Click.End</string>
+        <string />
+        <string>Program.Sub.Form_UnLoad.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Form_UnLoad_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string />
+        <string>F.ODBC.Connection!con.Close</string>
+        <string>F.Intrinsic.Control.End</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Form_UnLoad_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.End</string>
+        <string />
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Form_UnLoad.End</string>
+        <string />
+        <string>Program.Sub.Check_Part.Start</string>
+        <string>F.Intrinsic.Control.SetErrorHandler("Check_Part_Err")</string>
+        <string>F.Intrinsic.Control.ClearErrors</string>
+        <string />
+        <string>V.Local.sError.Declare(String)</string>
+        <string>V.Local.sFilter.Declare(String)</string>
+        <string />
+        <string>'Build filter string</string>
+        <string>F.Intrinsic.String.Build("SALESPERSON='{0}' AND PART='{1}'",V.Screen.F_Maint!ddlSalesperson.Text,V.Args.Part,V.Local.sFilter)</string>
+        <string>'Check to make sure that the selected part isn't already in the datatable</string>
+        <string>F.Data.DataView.Create("Commission","Part_View",22,V.Local.sFilter,"")</string>
+        <string />
+        <string>'Check row count, if 0 then we can add</string>
+        <string>F.Intrinsic.Control.If(V.DataView.Commission!Part_View.RowCount,=,0)</string>
+        <string>	F.Intrinsic.Variable.AddRV("Exists",False)</string>
+        <string>F.Intrinsic.Control.Else</string>
+        <string>	F.Intrinsic.Variable.AddRV("Exists",True)</string>
+        <string>F.Intrinsic.Control.EndIf</string>
+        <string />
+        <string>'Close dataview since we are finished with it</string>
+        <string>F.Data.DataView.Close("Commission","Part_View")</string>
+        <string />
+        <string>F.Intrinsic.Control.ExitSub</string>
+        <string />
+        <string>F.Intrinsic.Control.Label("Check_Part_Err")</string>
+        <string>F.Intrinsic.Control.If(V.Ambient.ErrorNumber,&lt;&gt;,0)</string>
+        <string>	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)</string>
+        <string>	F.Intrinsic.UI.Msgbox(V.Local.sError)</string>
+        <string>	F.Intrinsic.Control.CallSub(form_unload)</string>
+        <string>Function.Intrinsic.Control.EndIf</string>
+        <string>Program.Sub.Check_Part.End</string>
+        <string />
+        <string>Program.Sub.Comments.Start</string>
+        <string>${$0$}$AR Commission For Cash Receipts$}$BCC$}$9/13/2016 9:31:27 AM$}$False</string>
+        <string>${$2$}$$}$$}$0$}$4$}$Custom Menu Item$}$9/13/2016 9:31:26 AM$}$Sales Analysis -&gt; Administration -&gt; Commission Rates</string>
+        <string>${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This will be an excel file that will show the customer, Invoice number, Invoice Date, Part Number, Job ID, Purchase Qty, Piece Price, Total Price, Date Paid, Check Number, ACE%, Commission. There will be totals per Customer, and a Grand Total for the Salesperson. This will run from a Custom Menu Item under Sales Analysis -&gt; Reports -&gt; Commission Report.</string>
+        <string>Program.Sub.Comments.End</string>
+      </Lines>
+    </TextStrings>
+  </TextSource>
+  <Scrolling>
+    <Options>None</Options>
+  </Scrolling>
+  <Outlining>
+    <AllowOutlining>true</AllowOutlining>
+    <ImageSize>8</ImageSize>
+    <Ranges>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>0</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>41</Y>
+        </EndPoint>
+        <Text>Program.Sub.ScreenSU</Text>
+        <DisplayText>Program.Sub.ScreenSU</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>43</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>44</Y>
+        </EndPoint>
+        <Text>Program.Sub.Preflight</Text>
+        <DisplayText>Program.Sub.Preflight</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>46</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>68</Y>
+        </EndPoint>
+        <Text>Program.Sub.Main</Text>
+        <DisplayText>Program.Sub.Main</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>70</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>103</Y>
+        </EndPoint>
+        <Text>Program.Sub.cmdPartBrowse_Click</Text>
+        <DisplayText>Program.Sub.cmdPartBrowse_Click</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>105</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>141</Y>
+        </EndPoint>
+        <Text>Program.Sub.ddlSalesperson_Change</Text>
+        <DisplayText>Program.Sub.ddlSalesperson_Change</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>143</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>162</Y>
+        </EndPoint>
+        <Text>Program.Sub.cmdSave_Click</Text>
+        <DisplayText>Program.Sub.cmdSave_Click</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>164</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>196</Y>
+        </EndPoint>
+        <Text>Program.Sub.Load_Salespersons</Text>
+        <DisplayText>Program.Sub.Load_Salespersons</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>198</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>217</Y>
+        </EndPoint>
+        <Text>Program.Sub.Create_DataTable</Text>
+        <DisplayText>Program.Sub.Create_DataTable</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>219</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>247</Y>
+        </EndPoint>
+        <Text>Program.Sub.Format_GridView</Text>
+        <DisplayText>Program.Sub.Format_GridView</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>249</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>277</Y>
+        </EndPoint>
+        <Text>Program.Sub.cmdAdd_Click</Text>
+        <DisplayText>Program.Sub.cmdAdd_Click</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>279</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>308</Y>
+        </EndPoint>
+        <Text>Program.Sub.cmdDelete_Click</Text>
+        <DisplayText>Program.Sub.cmdDelete_Click</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>310</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>328</Y>
+        </EndPoint>
+        <Text>Program.Sub.Form_UnLoad</Text>
+        <DisplayText>Program.Sub.Form_UnLoad</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>330</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>360</Y>
+        </EndPoint>
+        <Text>Program.Sub.Check_Part</Text>
+        <DisplayText>Program.Sub.Check_Part</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+      <Range>
+        <StartPoint>
+          <X>0</X>
+          <Y>362</Y>
+        </StartPoint>
+        <EndPoint>
+          <X>2147483647</X>
+          <Y>366</Y>
+        </EndPoint>
+        <Text>Program.Sub.Comments</Text>
+        <DisplayText>Program.Sub.Comments</DisplayText>
+        <Visible>false</Visible>
+        <Level>0</Level>
+      </Range>
+    </Ranges>
+  </Outlining>
+  <HyperText />
+  <Spelling />
+  <Braces />
+</SyntaxEdit>
