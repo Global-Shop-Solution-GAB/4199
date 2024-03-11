@@ -1,0 +1,265 @@
+Program.Sub.ScreenSU.Start
+Gui.F_Report..Create
+Gui.F_Report..Caption("AR Commission/Royalties Report")
+Gui.F_Report..Size(5010,2565)
+Gui.F_Report..MinX(0)
+Gui.F_Report..MinY(0)
+Gui.F_Report..Position(0,0)
+Gui.F_Report..BackColor(-2147483633)
+Gui.F_Report..MousePointer(0)
+Gui.F_Report..Event(UnLoad,Unload)
+Gui.F_Report.dtpStart.Create(DatePicker)
+Gui.F_Report.dtpStart.Size(1935,285)
+Gui.F_Report.dtpStart.Position(195,405)
+Gui.F_Report.dtpEnd.Create(DatePicker)
+Gui.F_Report.dtpEnd.Size(1935,285)
+Gui.F_Report.dtpEnd.Position(2730,405)
+Gui.F_Report.lbl1.Create(Label,"Start Date",True,900,255,0,165,210,True,0,"Arial",8,-986896,0)
+Gui.F_Report.lbl2.Create(Label,"End Date",True,840,255,0,2700,195,True,0,"Arial",8,-986896,0)
+Gui.F_Report.lbl3.Create(Label,"To:",True,420,255,0,2280,480,True,0,"Arial",8,-986896,0)
+Gui.F_Report.ddlSalesperson.Create(DropDownList)
+Gui.F_Report.ddlSalesperson.Size(2625,330)
+Gui.F_Report.ddlSalesperson.Position(195,1005)
+Gui.F_Report.lbl4.Create(Label,"Salesperson",True,1095,255,0,165,795,True,0,"Arial",8,-986896,0)
+Gui.F_Report.cmdPrint.Create(Button)
+Gui.F_Report.cmdPrint.Size(765,375)
+Gui.F_Report.cmdPrint.Position(195,1485)
+Gui.F_Report.cmdPrint.Caption("Print")
+Gui.F_Report.cmdPrint.Event(Click,cmdPrint_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Variable.Global.iBIRUNID.Declare(Long,0)
+Variable.Global.iBILogID.Declare(Long,0)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'Load Salespersons into the drop down list
+F.Intrinsic.Control.CallSub(load_salespersons)
+F.Intrinsic.Control.CallSub(Create_DataTable)
+Gui.F_Report..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.Load_Salespersons.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Open recordset to get list of salespersons to add to Drop Down List
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rstSales","SELECT (ID + ' - ' + NAME) AS SALESPERSON FROM V_SALESPERSONS")
+
+'Check to make sure we found records, otherwise inform user and exit program
+F.Intrinsic.Control.If(V.ODBC.con!rstSales.EOF,<>,True)
+	'Loop through the recordset and add them to the ddl
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rstSales.EOF,=,True)
+		Gui.F_Report.ddlSalesperson.AddItem(V.ODBC.con!rstSales.FieldValTrim!SALESPERSON)
+		F.ODBC.con!rstSales.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("No Salespersons found. Exiting Program.","Error")
+	F.Intrinsic.Control.CallSub(unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Load_Salespersons.End
+
+Program.Sub.cmdPrint_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdPrint_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.dBegDate.Declare(Date)
+V.Local.dEndDate.Declare(Date)
+V.Local.dTemp.Declare(Date)
+V.Local.sSQL.Declare(String)
+V.Local.sDataRow.Declare(String)
+V.Local.fCommission.Declare(Float)
+V.Local.fTotalComm.Declare(Float)
+V.Local.sSalesID.Declare(String)
+V.Local.sSalesName.Declare(String)
+
+'Check to make sure they have made a selection for Salesperson
+F.Intrinsic.Control.If(V.Screen.F_Report!ddlSalesperson.Text,=,"")
+	F.Intrinsic.UI.Msgbox("You must select a Salesperson.")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.UI.InvokeWaitDialog("Printing Report.....")
+Gui.F_Report..Visible(False)
+
+F.Global.BI.GetRunID(V.Global.iBIRUNID)
+F.Global.BI.StartLogging(V.Global.iBIRUNID,-1,-1,"",V.Global.iBILogID)
+
+V.Local.dBegDate.Set(V.Screen.F_Report!dtpStart.Value)
+V.Local.dEndDate.Set(V.Screen.F_Report!dtpEnd.Value)
+
+'Check to make sure that the end date is greater than the start date
+F.Intrinsic.Control.If(V.Local.dBegDate,>,V.Local.dEndDate)
+	V.Local.dTemp.Set(V.Local.dBegDate)
+	V.Local.dBegDate.Set(V.Local.dEndDate)
+	V.Local.dEndDate.Set(V.Local.dBegDate)
+F.Intrinsic.Control.EndIf
+
+'Get Sales ID for the salesperson
+F.Intrinsic.String.Split(V.Screen.F_Report!ddlSalesperson.Text," - ",V.Local.sSalesID)
+'Set Sales Person name for report.
+V.Local.sSalesName.Set(V.Local.sSalesID(1))
+
+'Build sql query to get the AR Open Items within the date range
+F.Intrinsic.String.Build("SELECT * FROM V_AR_OPEN_ITEMS WHERE BATCH_CODE = '11' AND SALESPERSON = '{0}' AND DATE_TRANSACTION BETWEEN '{1}' AND '{2}'",V.Local.sSalesID,V.Local.dBegDate.PervasiveDate,V.Local.dEndDate.PervasiveDate,V.Local.sSQL)
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rstInvoice",V.Local.sSQL)
+
+'Loop through each invoice found
+F.Intrinsic.Control.DoUntil(V.ODBC.con!rstInvoice.EOF,=,True)
+	V.Local.dTemp.Set(V.ODBC.con!rstInvoice.FieldVal!DATE_INVOICE)
+	'We need to get the line information for the order associated with the invoice
+	F.Intrinsic.String.Build("SELECT * FROM V_ORDER_HIST_LINE WHERE INVOICE = '{0}' AND DATE_INVOICE = '{1}'",V.ODBC.con!rstInvoice.FieldValTrim!INVOICE,V.Local.dTemp.PervasiveDate,V.Local.sSQL)
+	F.ODBC.Connection!con.OpenLocalRecordsetRO("rstOrder",V.Local.sSQL)
+	
+	'Loop through each line
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rstOrder.EOF,=,True)
+		'Next lets check to make sure that the part on the line is one that the salesperson selected has set up for commission. If not then we have no need of the part
+		F.Intrinsic.String.Build("SELECT * FROM GCG_4199_COMM_MAINT WHERE PART = '{0}' AND SALESPERSON = '{1}'",V.ODBC.con!rstOrder.FieldVal!PART,V.Screen.F_Report!ddlSalesperson.Text,V.Local.sSQL)
+		F.ODBC.Connection!con.OpenLocalRecordsetRO("rstComm",V.Local.sSQL)
+		
+		F.Intrinsic.Control.If(V.ODBC.con!rstComm.EOF,<>,True)
+			'Now that we have all the verification information needed in order to add records to the Datatable to be added to our preprocessor table lets go!
+			'We must calculate the Commission amount based on the Commission percent we found
+			F.Intrinsic.Math.Div(V.ODBC.con!rstComm.FieldValFloat!COMM_PERCENT,100,V.Local.fCommission)
+			F.Intrinsic.Math.Mult(V.ODBC.con!rstOrder.FieldValFloat!Extension,V.Local.fCommission,V.Local.fTotalComm)
+			F.Intrinsic.String.Build("{0}*!*{1}",V.Local.sDataRow,,V.Local.sDataRow)
+			F.Data.DataTable.AddRow("Commission","Customer",V.ODBC.con!rstInvoice.FieldValTrim!CUSTOMER,"SalesPerson",V.Local.sSalesName,"Invoice_No",V.ODBC.con!rstInvoice.FieldValTrim!INVOICE,"Invoice_Date",V.ODBC.con!rstInvoice.FieldVal!DATE_INVOICE,"Part",V.ODBC.con!rstOrder.FieldValTrim!CUSTOMER_PART,"Job_ID",V.ODBC.con!rstOrder.FieldValTrim!PART,"Shipped_Qty",V.ODBC.con!rstOrder.FieldValTrim!QTY_SHIPPED,"Piece_Price",V.ODBC.con!rstOrder.FieldValFloat!PRICE,"Total_Price",V.ODBC.con!rstOrder.FieldValFloat!Extension,"Date_Paid",V.ODBC.con!rstInvoice.FieldVal!DATE_TRANSACTION,"Check_Num",V.ODBC.con!rstInvoice.FieldValTrim!REFERENCE,"ACE",V.ODBC.con!rstComm.FieldValFloat!COMM_PERCENT,"Commission",V.Local.fTotalComm)
+		F.Intrinsic.Control.EndIf
+		
+		F.ODBC.con!rstComm.Close
+		F.ODBC.con!rstOrder.MoveNext
+	F.Intrinsic.Control.Loop
+	
+	F.ODBC.con!rstOrder.Close
+	F.ODBC.con!rstInvoice.MoveNext
+F.Intrinsic.Control.Loop
+
+F.ODBC.con!rstInvoice.Close
+
+F.Intrinsic.Control.CallSub(Print_Report)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdPrint_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdPrint_Click.End
+
+Program.Sub.Print_Report.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+
+'Stop logging
+F.Global.BI.StopLogging(V.Global.iBILogID)
+
+'Check for a rowcount greater than 0
+F.Intrinsic.Control.If(V.DataTable.Commission.RowCount,>,0)
+	'Set the BI Run ID in the datatable
+	F.Data.DataTable.SetValue("Commission",-1,"BIRUNID",V.Global.iBIRUNID)
+	F.Data.DataTable.SaveToDB("Commission","con","GCG_4199_COMM_REPORT","BIRUNID*!*CUSTOMER*!*INVOICE_NO*!*JOB_ID")
+	'Call report
+	F.Global.BI.RunReportPreProcessor(V.Global.iBIRUNID,V.Global.iBIRUNID,"","","",-1,True,"",-1,"",-1,"","",V.Local.sRet)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.CallSub(unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Print_Report.End
+
+Program.Sub.Create_DataTable.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Data.DataTable.Create("Commission",True)
+F.Data.DataTable.AddColumn("Commission","BIRUNID","String","")
+F.Data.DataTable.AddColumn("Commission","Customer","String","")
+F.Data.DataTable.AddColumn("Commission","Invoice_No","String","")
+F.Data.DataTable.AddColumn("Commission","Invoice_Date","Date",1/1/1900)
+F.Data.DataTable.AddColumn("Commission","Part","String","")
+F.Data.DataTable.AddColumn("Commission","Job_ID","String","")
+F.Data.DataTable.AddColumn("Commission","Shipped_Qty","Float",0.0)
+F.Data.DataTable.AddColumn("Commission","Piece_Price","Float",0.0)
+F.Data.DataTable.AddColumn("Commission","Total_Price","Float",0.0)
+F.Data.DataTable.AddColumn("Commission","Date_Paid","Date",1/1/1900)
+F.Data.DataTable.AddColumn("Commission","Check_Num","String","")
+F.Data.DataTable.AddColumn("Commission","ACE","Float",0.0)
+F.Data.DataTable.AddColumn("Commission","SalesPerson","String","")
+F.Data.DataTable.AddColumn("Commission","Commission","Float",0.0)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Create_DataTable.End
+
+Program.Sub.Unload.Start
+F.Intrinsic.Control.SetErrorHandler("Unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Report.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+
+Function.Intrinsic.Control.EndIf
+Program.Sub.Unload.End
+
+Program.Sub.Comments.Start
+${$0$}$AR Commission For Cash Receipts$}$BCC$}$9/14/2016 3:08:23 PM$}$False
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This will be an excel file that will show the customer, Invoice number, Invoice Date, Part Number, Job ID, Purchase Qty, Piece Price, Total Price, Date Paid, Check Number, ACE%, Commission. There will be totals per Customer, and a Grand Total for the Salesperson. This will run from a Custom Menu Item under Sales Analysis -> Reports -> Commission Report.
+Program.Sub.Comments.End
