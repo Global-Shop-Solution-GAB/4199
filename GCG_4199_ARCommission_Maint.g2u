@@ -1,0 +1,366 @@
+Program.Sub.ScreenSU.Start
+Gui.F_Maint..Create
+Gui.F_Maint..Size(6495,4695)
+Gui.F_Maint..MinX(0)
+Gui.F_Maint..MinY(0)
+Gui.F_Maint..Position(0,0)
+Gui.F_Maint..BackColor(-2147483633)
+Gui.F_Maint..MousePointer(0)
+Gui.F_Maint..Event(UnLoad,Form_UnLoad)
+Gui.F_Maint..Caption("Commission Maintenance")
+Gui.F_Maint.lbl1.Create(Label,"Salesperson",True,1125,255,0,240,255,True,0,"Arial",8,-986896,0)
+Gui.F_Maint.ddlSalesperson.Create(DropDownList)
+Gui.F_Maint.ddlSalesperson.Size(2370,330)
+Gui.F_Maint.ddlSalesperson.Position(255,465)
+Gui.F_Maint.ddlSalesperson.Event(Change,ddlSalesperson_Change)
+Gui.F_Maint.ddlSalesperson.Event(Click,ddlSalesperson_Change)
+Gui.F_Maint.txtPart.Create(TextBox,"",True,1965,300,0,2880,465,True,0,"Arial",8,-2147483643,1)
+Gui.F_Maint.lbl2.Create(Label,"Part",True,570,255,0,2865,255,True,0,"Arial",8,-986896,0)
+Gui.F_Maint.cmdPartBrowse.Create(Button)
+Gui.F_Maint.cmdPartBrowse.Size(450,375)
+Gui.F_Maint.cmdPartBrowse.Position(4950,420)
+Gui.F_Maint.cmdPartBrowse.Caption("^")
+Gui.F_Maint.cmdPartBrowse.Event(Click,cmdPartBrowse_Click)
+Gui.F_Maint.cmdAdd.Create(Button)
+Gui.F_Maint.cmdAdd.Size(675,375)
+Gui.F_Maint.cmdAdd.Position(5520,435)
+Gui.F_Maint.cmdAdd.Caption("Add")
+Gui.F_Maint.cmdAdd.Event(Click,cmdAdd_Click)
+Gui.F_Maint.GsGridControl1.Create(GsGridControl)
+Gui.F_Maint.GsGridControl1.Size(5850,2595)
+Gui.F_Maint.GsGridControl1.Position(255,915)
+Gui.F_Maint.cmdSave.Create(Button)
+Gui.F_Maint.cmdSave.Size(855,375)
+Gui.F_Maint.cmdSave.Position(255,3615)
+Gui.F_Maint.cmdSave.Caption("Save")
+Gui.F_Maint.cmdSave.Event(Click,cmdSave_Click)
+Gui.F_Maint.cmdDelete.Create(Button)
+Gui.F_Maint.cmdDelete.Size(855,375)
+Gui.F_Maint.cmdDelete.Position(1245,3615)
+Gui.F_Maint.cmdDelete.Caption("Delete")
+Gui.F_Maint.cmdDelete.Event(Click,cmdDelete_Click)
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!con.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+'Load Drop Down List
+F.Intrinsic.Control.CallSub(Load_Salespersons)
+'Create DataTable
+F.Intrinsic.Control.CallSub(Create_DataTable)
+'Format GridView
+F.Intrinsic.Control.CallSub(Format_GridView)
+Gui.F_Maint..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Main.End
+
+Program.Sub.cmdPartBrowse_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdPartBrowse_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRet.Declare(String)
+V.Local.sFilter.Declare(String)
+
+'Launch Part browser
+F.Intrinsic.UI.Browser(105,"",V.Local.sRet)
+'Make sure a selection was made before loading to textbox
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	'Split the return
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	'Call check part subroutine
+	F.Intrinsic.Control.CallSub(check_part,"Part",V.Local.sRet(0))
+
+	F.Intrinsic.Control.If(V.Args.Exists,=,False)
+		Gui.F_Maint.txtPart.Text(V.Local.sRet(0))
+	F.Intrinsic.Control.Else
+		F.Intrinsic.UI.Msgbox("Part already exists for Salesperson")
+		Gui.F_Maint.txtPart.Text("")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdPartBrowse_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdPartBrowse_Click.End
+
+Program.Sub.ddlSalesperson_Change.Start
+F.Intrinsic.Control.SetErrorHandler("ddlSalesperson_Change_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sSalesPerson.Declare(String)
+V.Local.sFilter.Declare(String)
+
+'Whenever a new Salesperson is selected, re-load datatable with that persons information
+V.Local.sSalesPerson.Set(V.Screen.F_Maint!ddlSalesperson.Text)
+
+F.Intrinsic.Control.If(V.Local.sSalesPerson,<>,"")
+	'Build filter
+	F.Intrinsic.String.Build("SALESPERSON='{0}'",V.Local.sSalesPerson,V.Local.sFilter)
+	'Set filter so that the grid only shows information for that particular salesperson
+	F.Data.DataView.SetFilter("Commission","Comm_View",V.Local.sFilter)
+	'Check to make sure that the part doesn't already exist for the salesperson if it is selected already
+	F.Intrinsic.Control.CallSub(check_part,"Part",V.Screen.F_Maint!txtPart.Text)
+	
+	F.Intrinsic.Control.If(V.Args.Exists,=,True)
+		F.Intrinsic.UI.Msgbox("Part already exists for Salesperson")
+		Gui.F_Maint.txtPart.Text("")
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.Else
+	'If user selects blank load all data
+	F.Data.DataView.SetFilter("Commission","Comm_View","")
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("ddlSalesperson_Change_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.ddlSalesperson_Change.End
+
+Program.Sub.cmdSave_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdSave_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Save to database. mode 256 updates any modified records, and adds new records for those that are new
+F.Data.DataTable.SaveToDB("Commission","con","GCG_4199_COMM_MAINT","SALESPERSON*!*PART",7)
+'Save to database for deleted records. mode 256 does not account for anything that has been deleted
+'F.Data.DataTable.SaveToDB("Commission","con","GCG_4199_COMM_MAINT","SALESPERSON*!*PART",4)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdSave_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdSave_Click.End
+
+Program.Sub.Load_Salespersons.Start
+F.Intrinsic.Control.SetErrorHandler("Load_Salespersons_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Add Empty value to Drop Down List
+Gui.F_Maint.ddlSalesperson.AddItem("")
+
+'Open recordset to get list of salespersons to add to Drop Down List
+F.ODBC.Connection!con.OpenLocalRecordsetRO("rstSales","SELECT (ID + ' - ' + NAME) AS SALESPERSON FROM V_SALESPERSONS")
+
+'Check to make sure we found records, otherwise inform user and exit program
+F.Intrinsic.Control.If(V.ODBC.con!rstSales.EOF,<>,True)
+	'Loop through the recordset and add them to the ddl
+	F.Intrinsic.Control.DoUntil(V.ODBC.con!rstSales.EOF,=,True)
+		Gui.F_Maint.ddlSalesperson.AddItem(V.ODBC.con!rstSales.FieldValTrim!SALESPERSON)
+		F.ODBC.con!rstSales.MoveNext
+	F.Intrinsic.Control.Loop
+F.Intrinsic.Control.Else
+	F.Intrinsic.UI.Msgbox("No Salespersons found. Exiting Program.","Error")
+	F.Intrinsic.Control.CallSub(form_unload)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Load_Salespersons_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Load_Salespersons.End
+
+Program.Sub.Create_DataTable.Start
+F.Intrinsic.Control.SetErrorHandler("Load_Salespersons_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Data.DataTable.CreateFromSQL("Commission","con","SELECT SALESPERSON,PART,COMM_PERCENT FROM GCG_4199_COMM_MAINT",True)
+F.Data.DataView.Create("Commission","Comm_View",22,"","SALESPERSON ASC")
+Gui.F_Maint.GsGridControl1.AddGridViewFromDataView("Grid_Comm","Commission","Comm_View")
+Gui.F_Maint.GsGridControl1.MainView("Grid_Comm")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Load_Salespersons_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Create_DataTable.End
+
+Program.Sub.Format_GridView.Start
+F.Intrinsic.Control.SetErrorHandler("Create_DataTable_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+'Make Commission percent Column editable
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","ReadOnly","False")
+
+'Set Column Titles
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","Caption","% Comm")
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","SALESPERSON","Caption","Salesperson")
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","Caption","Part")
+
+'Set Column Widths
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","WIDTH",50)
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","COMM_PERCENT","FixedWidth",True)
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","WIDTH",125)
+Gui.F_Maint.GsGridControl1.SetColumnProperty("Grid_Comm","PART","FixedWidth",True)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Create_DataTable_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Format_GridView.End
+
+Program.Sub.cmdAdd_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdAdd_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sValues.Declare(String)
+
+'Make sure the user has selected both a salesperson and a part
+F.Intrinsic.Control.If(V.Screen.F_Maint!ddlSalesperson.Text,=,"")
+	F.Intrinsic.UI.Msgbox("You must select a Salesperson.")
+F.Intrinsic.Control.ElseIf(V.Screen.F_Maint!txtPart.Text,=,"")
+	F.Intrinsic.UI.Msgbox("You must select a Part.")
+F.Intrinsic.Control.Else
+	'Build list of values to be added to the grid
+  	F.Intrinsic.String.Build("{0}*!*{1}*!*.0",V.Screen.F_Maint!ddlSalesperson.Text,V.Screen.F_Maint!txtPart.Text,V.Local.sValues)
+	Gui.F_Maint.GsGridControl1.AddRow("Grid_Comm",V.Local.sValues)
+	'Reset the part textbox
+	Gui.F_Maint.txtPart.Text("")
+F.Intrinsic.Control.EndIf
+	
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdAdd_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdAdd_Click.End
+
+Program.Sub.cmdDelete_Click.Start
+F.Intrinsic.Control.SetErrorHandler("cmdDelete_Click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sRow.Declare(String)
+V.Local.iRow.Declare(Long)
+V.Local.iC.Declare(Long)
+
+Gui.F_Maint.GsGridControl1.GetSelectedRowsInFocus(V.Local.sRow)
+
+F.Intrinsic.Control.If(V.Local.sRow,<>,-1)
+	F.Intrinsic.String.Split(V.Local.sRow,"*!*",V.Local.sRow)
+	
+	F.Intrinsic.Control.For(V.Local.iC,0,V.Local.sRow.UBound,1)
+		V.Local.iRow.Set(V.Local.sRow(V.Local.iC))
+		F.Data.DataTable.DeleteRow("Commission",V.Local.iRow)
+	F.Intrinsic.Control.Next(V.Local.iC)
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdDelete_Click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.cmdDelete_Click.End
+
+Program.Sub.Form_UnLoad.Start
+F.Intrinsic.Control.SetErrorHandler("Form_UnLoad_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.ODBC.Connection!con.Close
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Form_UnLoad_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+
+Function.Intrinsic.Control.EndIf
+Program.Sub.Form_UnLoad.End
+
+Program.Sub.Check_Part.Start
+F.Intrinsic.Control.SetErrorHandler("Check_Part_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+V.Local.sFilter.Declare(String)
+
+'Build filter string
+F.Intrinsic.String.Build("SALESPERSON='{0}' AND PART='{1}'",V.Screen.F_Maint!ddlSalesperson.Text,V.Args.Part,V.Local.sFilter)
+'Check to make sure that the selected part isn't already in the datatable
+F.Data.DataView.Create("Commission","Part_View",22,V.Local.sFilter,"")
+
+'Check row count, if 0 then we can add
+F.Intrinsic.Control.If(V.DataView.Commission!Part_View.RowCount,=,0)
+	F.Intrinsic.Variable.AddRV("Exists",False)
+F.Intrinsic.Control.Else
+	F.Intrinsic.Variable.AddRV("Exists",True)
+F.Intrinsic.Control.EndIf
+
+'Close dataview since we are finished with it
+F.Data.DataView.Close("Commission","Part_View")
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Check_Part_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_4199_ARCommission_Maint.g2u",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(form_unload)
+Function.Intrinsic.Control.EndIf
+Program.Sub.Check_Part.End
+
+Program.Sub.Comments.Start
+${$0$}$AR Commission For Cash Receipts$}$BCC$}$9/13/2016 9:31:27 AM$}$False
+${$2$}$$}$$}$0$}$4$}$Custom Menu Item$}$9/13/2016 9:31:26 AM$}$Sales Analysis -> Administration -> Commission Rates
+${$3$}$0$}$$}$0$}$-1$}$$}$12:00:00 AM$}$This will be an excel file that will show the customer, Invoice number, Invoice Date, Part Number, Job ID, Purchase Qty, Piece Price, Total Price, Date Paid, Check Number, ACE%, Commission. There will be totals per Customer, and a Grand Total for the Salesperson. This will run from a Custom Menu Item under Sales Analysis -> Reports -> Commission Report.
+Program.Sub.Comments.End
